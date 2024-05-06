@@ -3,8 +3,3 @@ Welcome to the It Is Unique CDN - Official! This Content Delivery Network (CDN) 
 ## Usage
 To use the It Is Unique CDN - Official, simply reference the desired resource using the following URL format: https://cdn.itisuniqueblog.com/{path_to_resource}
 Replace `{path_to_resource}` with the path to the specific resource you wish to access (e.g., `css/styles.css`, `images/logo.png`, etc.).
-### Example
-To include a stylesheet from the CDN in your HTML file:
-```html
-<link rel="stylesheet" href="https://cdn.itisuniqueblog.com/css/styles.css">
-<script src="https://cdn.itisuniqueblog.com/js/script.js"></script>
