@@ -7,3 +7,4 @@ Replace `{path_to_resource}` with the path to the specific resource you wish to 
 To include a stylesheet from the CDN in your HTML file:
 ```html
 <link rel="stylesheet" href="https://cdn.itisuniqueblog.com/css/styles.css">
+<script src="https://cdn.itisuniqueblog.com/js/script.js"></script>
