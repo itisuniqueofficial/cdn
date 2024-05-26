@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+  <user>
+    <username>hello</username>
+    <password>hi</password>
+    <expiry>2024-12-31</expiry>
+  </user>
+  <user>
+    <username>test</username>
+    <password>test123</password>
+    <expiry>2023-06-01</expiry>
+  </user>
+</users>
