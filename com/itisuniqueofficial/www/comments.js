@@ -19,6 +19,7 @@ class CommentsWidget {
         this.loadMoreBtn = document.getElementById("load-more-comments");
         this.countElement = document.getElementById("comments-count");
         this.isLoadingMore = false;
+        this.retryAttempts = 0;
         this.init();
     }
 
@@ -41,16 +42,21 @@ class CommentsWidget {
             this.allComments = (data.feed.entry || []).sort((a, b) => new Date(b.published.$t) - new Date(a.published.$t));
             this.renderComments();
             this.updateUI();
+            this.retryAttempts = 0; 
         } catch (error) {
             console.error("Failed to load comments:", error);
-            this.showError();
+            if (this.retryAttempts < 3) {
+                this.retryAttempts++;
+                setTimeout(() => this.fetchComments(), 2000);
+            } else {
+                this.showError();
+            }
         } finally {
             this.showLoader(false);
         }
     }
 
     renderComments() {
-        this.container.innerHTML = "";
         const fragment = document.createDocumentFragment();
         this.allComments.slice(0, this.displayedComments).forEach((comment, index) => {
             fragment.appendChild(this.createCommentElement(comment, index));
@@ -76,11 +82,8 @@ class CommentsWidget {
     }
 
     getAvatarUrl(src) {
-        if (!src) return config.defaultAvatar;
-        if (src.includes("/s1600/")) return src.replace("/s1600/", "/s" + config.avatarSize + "-c/");
-        if (src.includes("/s220/")) return src.replace("/s220/", "/s" + config.avatarSize + "-c/");
-        if (src.includes("blank.gif")) return config.defaultAvatar;
-        return src;
+        if (!src || src.includes("blank.gif")) return config.defaultAvatar;
+        return src.replace(/\/s(1600|220)\//, `/s${config.avatarSize}-c/`);
     }
 
     setupIntersectionObserver() {
